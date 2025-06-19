@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
 import { UserComponent } from './user/user.component';
+import { UserFormComponent } from './user-form/user-form.component';
 
 @Component({
   selector: 'user-app',
-  imports: [UserComponent],
+  imports: [UserComponent, UserFormComponent],
   templateUrl: './user-app.component.html',
 })
 export class UserAppComponent implements OnInit {
@@ -22,6 +23,7 @@ export class UserAppComponent implements OnInit {
       
   }
 
-
-
+  addUser(user: User) {
+    this.users = [... this.users, {... user, id: new Date().getTime()}];
+  }
 }

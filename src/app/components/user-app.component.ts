@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
   selector: 'user-app',
   imports: [UserComponent, UserFormComponent],
   templateUrl: './user-app.component.html',
+  styleUrls: ['./user-app.component.css'],
 })
 export class UserAppComponent implements OnInit {
 
@@ -41,7 +42,7 @@ export class UserAppComponent implements OnInit {
       icon: "success"
     });
     this.userSelected = new User();
-    this.setOpen();
+    this.setOpenClose();
   }
 
   removeUser(id: number) {
@@ -71,7 +72,7 @@ export class UserAppComponent implements OnInit {
     this.open = true;
   }
 
-  setOpen() {
+  setOpenClose() {
     this.open = !this.open;
   }
 }

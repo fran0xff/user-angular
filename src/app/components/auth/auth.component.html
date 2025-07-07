@@ -1,0 +1,23 @@
+<div class="card w-50">
+    <div class="card-header">
+        <h5>Iniciar sesión</h5>
+    </div>
+        <div class="card-body">
+            <form (ngSubmit)="onSubmit()">
+                <input
+                    name="username"
+                    class="form-control my-2 w-50"
+                    placeholder="Username"
+                    [(ngModel)]="user.username"
+                >
+                <input
+                    name="password"
+                    type="password"
+                    class="form-control my-2 w-50"
+                    placeholder="Password"
+                    [(ngModel)]="user.password"
+                >
+                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+            </form> 
+        </div>
+</div>

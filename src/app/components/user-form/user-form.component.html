@@ -94,30 +94,32 @@
                     } -->
 
                 </div>
-                <div>
-                    <input placeholder="Password" type="password" name="password" [(ngModel)]="user.password"
-                        class="form-control my-2" #password="ngModel"><!-- required="true" minlength="6" -->
-
-                    @if (errors?.password) {
-                    <div class="text-danger">
-                        {{errors.password}}
+                @if(user.id == 0) {
+                    <div>
+                        <input placeholder="Password" type="password" name="password" [(ngModel)]="user.password"
+                            class="form-control my-2" #password="ngModel"><!-- required="true" minlength="6" -->
+    
+                        @if (errors?.password) {
+                        <div class="text-danger">
+                            {{errors.password}}
+                        </div>
+                        }
+                        <!-- Otra alternativa para mostrar los errores del formulario -->
+                        <!--    
+                        @if (password.invalid && (password.dirty || password.touched)) {
+                        @if (password.errors!['required']) {
+                        <div class="text-danger">
+                            Password es requerido
+                        </div>
+                        }
+                        @if (password.errors!['minlength']) {
+                        <div class="text-danger">
+                            Password debe tener al menos 6 caracteres!
+                        </div>
+                        }
+                        } -->
                     </div>
-                    }
-                    <!-- Otra alternativa para mostrar los errores del formulario -->
-                    <!--    
-                    @if (password.invalid && (password.dirty || password.touched)) {
-                    @if (password.errors!['required']) {
-                    <div class="text-danger">
-                        Password es requerido
-                    </div>
-                    }
-                    @if (password.errors!['minlength']) {
-                    <div class="text-danger">
-                        Password debe tener al menos 6 caracteres!
-                    </div>
-                    }
-                    } -->
-                </div>
+                }
                 <div>
                       <button type="submit" class="btn btn-primary my-2" ><!--[disabled]="userForm.invalid" -->
                         {{(user.id >0) ? 'Actualizar' : 'Crear'}}

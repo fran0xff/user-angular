@@ -8,7 +8,10 @@ import { RouterModule } from '@angular/router';
 })
 export class PaginatorComponent {
 
+  
+
   @Input () url: string = '';
   @Input () paginator: any = {};
 
+  
 }

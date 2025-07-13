@@ -1,7 +1,9 @@
 
 <h3>{{title}}</h3>
 
-<button class="btn btn-primary my-3" [routerLink]="['/users/create']">Crear Usuario</button>
+@if(admin) {
+    <button class="btn btn-primary my-3" [routerLink]="['/users/create']">Crear Usuario</button>
+}
 
 @if (users.length == 0) {
             <div class="alert alert-warning">No Hay registros de usuarios</div>
@@ -14,8 +16,10 @@
                             <th>lastname</th>
                             <th>email</th> 
                             <th>username</th>
-                            <th>remove</th>
-                            <th>update</th>
+                            @if(admin) {
+                                <th>remove</th>
+                                <th>update</th>
+                            }
 
                         </tr>
                     </thead>
@@ -27,18 +31,20 @@
                                 <td> {{user.lastname }}</td>
                                 <td> {{user.email }}</td>
                                 <td> {{user.username }}</td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm"
-                                            (click)="onRemoveUser(user.id)">
-                                        remove
-                                    </button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-info btn-sm"
-                                            [routerLink]="['/users/edit', user.id]">
-                                        update
-                                    </button>
-                                </td>
+                                @if(admin) {
+                                    <td>
+                                        <button class="btn btn-danger btn-sm"
+                                                (click)="onRemoveUser(user.id)">
+                                            remove
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-info btn-sm"
+                                                [routerLink]="['/users/edit', user.id]">
+                                            update
+                                        </button>
+                                    </td>
+                                }
                             </tr>
                         }
                     </tbody>

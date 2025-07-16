@@ -3,17 +3,16 @@ import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
-
   const service = inject(AuthService);
   const router = inject(Router);
-  if(service.authenticated()) {
+  if (service.authenticated()) {
     if (isTokenExpired()) {
       service.logout();
       router.navigate(['/login']);
       return false;
     }
     if (!service.isAdmin()) {
-      router.navigate(['/forbidden']);
+      router.navigate(['/forbidden'])
       return false;
     }
     return true;
@@ -25,9 +24,6 @@ export const authGuard: CanActivateFn = (route, state) => {
 const isTokenExpired = () => {
   const service = inject(AuthService);
   const token = service.token;
-  if (!token) {
-    return true; // or handle as expired if preferred
-  }
   const payload = service.getPayload(token);
   const exp = payload.exp;
   const now = new Date().getTime() / 1000;

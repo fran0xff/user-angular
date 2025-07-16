@@ -5,7 +5,8 @@ import Swal from 'sweetalert2';
 import { SharingDataService } from '../../services/sharing-data.service';
 
 @Component({
-  selector: 'auth',
+  selector: 'app-auth',
+  standalone: true,
   imports: [FormsModule],
   templateUrl: './auth.component.html'
 })
@@ -16,23 +17,16 @@ export class AuthComponent {
   constructor(private sharingData: SharingDataService) {
     this.user = new User();
   }
+
   onSubmit() {
-    if(!this.user.username || !this.user.password) {
-      Swal.fire({
-        title: 'Error de validación',
-        text: 'Username y password requeridos.',
-        icon: 'error'
-      });
+    if (!this.user.username || !this.user.password) {
+      Swal.fire(
+        'Error de validacion',
+        'Username y password requeridos!',
+        'error'
+      );
     } else {
-      this.sharingData.handlerLoginEventEmitter.emit({
-        username: this.user.username, password: this.user.password});
-      Swal.fire({
-        title: 'Título',
-        text: 'Bienvenido',
-        icon: 'success'
-      });
+      this.sharingData.handlerLoginEventEmitter.emit({ username: this.user.username, password: this.user.password });
     }
-
   }
-
 }

@@ -5,18 +5,15 @@ import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'navbar',
+  standalone: true,
   imports: [RouterModule],
-  templateUrl: './navbar.component.html',
+  templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {
 
   constructor(private authService: AuthService,
     private router: Router
-  ) {}
-
-  @Input() users: User[] = [];
-
-  @Input() paginator = {};
+  ){}
 
   get login() {
     return this.authService.user;
@@ -28,7 +25,6 @@ export class NavbarComponent {
 
   handlerLogout() {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login'])
   }
-
 }

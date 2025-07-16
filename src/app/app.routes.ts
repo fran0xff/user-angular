@@ -1,4 +1,3 @@
-import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 import { UserComponent } from './components/user/user.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
@@ -9,8 +8,8 @@ import { Forbidden403Component } from './components/forbidden403/forbidden403.co
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: '/users/page/0',
-        pathMatch: 'full'
+        pathMatch: 'full',
+        redirectTo: '/users/page/0'
     },
     {
         path: 'users',
@@ -21,21 +20,22 @@ export const routes: Routes = [
         component: UserComponent,
     },
     {
-        path: 'users/create',
+        path: 'users/create', 
         component: UserFormComponent,
-        canActivate: [authGuard],
+        canActivate: [authGuard]
     },
     {
         path: 'users/edit/:id',
         component: UserFormComponent,
-        canActivate: [authGuard],
+        canActivate: [authGuard]
     },
     {
         path: 'login',
-        component: AuthComponent,
+        component: AuthComponent
     },
     {
         path: 'forbidden',
-        component: Forbidden403Component,
+        component: Forbidden403Component
     }
-]
+
+];

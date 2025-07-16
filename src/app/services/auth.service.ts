@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  loginUser({ username, password }: any) {
+  loginUser({ username, password }: any): Observable<any>{
     return this.http.post<any>(this.url, { username, password });
   }
 
@@ -30,51 +31,52 @@ export class AuthService {
   get user() {
     if (this._user.isAuth) {
       return this._user;
-    } else if (sessionStorage.getItem('login') != null) {
+    } else if(sessionStorage.getItem('login') != null) {
       this._user = JSON.parse(sessionStorage.getItem('login') || '{}');
       return this._user;
     }
     return this._user;
   }
 
-  set token(token: string){
+  set token(token: string) {
     this._token = token;
     sessionStorage.setItem('token', token);
   }
 
-  get token(): string | undefined {
+  get token() {
     if (this._token != undefined) {
       return this._token;
     } else if (sessionStorage.getItem('token') != null) {
-      this._token = sessionStorage.getItem('token') || '{}';
+      this._token = sessionStorage.getItem('token') || '';
       return this._token;
     }
     return this._token!;
-    }
-
-    getPayload(token: string){
-      if (token != null) {
-        return JSON.parse(atob(token.split('.')[1]));
-      } 
-      return null;
-    }
-
-    isAdmin() {
-      return this.user.isAdmin;
-    }
-
-    authenticated() {
-      return this.user.isAuth;  
-    }
-
-    logout() {
-      this._user = {
-        isAuth: false,
-        isAdmin: false,
-        user: undefined
-      };
-      this._token = undefined;
-      sessionStorage.removeItem('login');
-      sessionStorage.removeItem('token');
-    }
   }
+
+  getPayload(token: string) {
+    if (token != null) {
+      return JSON.parse(atob(token.split(".")[1]));
+    }
+    return null;
+  }
+
+  isAdmin() {
+    return this.user.isAdmin;
+  }
+
+  authenticated() {
+    return this.user.isAuth;
+  }
+
+  logout() {
+    this._token = undefined;
+    this._user = {
+      isAuth: false,
+      isAdmin: false,
+      user: undefined
+    };
+    sessionStorage.removeItem('login');
+    sessionStorage.removeItem('token');
+  }
+
+}
